@@ -3,7 +3,7 @@
 
     <test name="WebOrders Automated Tests">
         <classes>
-            <class name="com.weborders.tests.functional">
+            <class name="today.mookit.tests.functional.LoginTests">
                 <methods>
                     <include name="loginTest"/>
                 </methods>
