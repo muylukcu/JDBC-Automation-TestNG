@@ -231,6 +231,7 @@ public class DBUtils {
 	public static boolean verifyConferenceHasBeenCraeted(String firstName, String lastName, String date) {
 		//format date to the appropriate format 
 		date = BrowserUtils.convertDateFormat("MMMM dd, yyyy", "yyyy-MM-dd", date).trim();
+		//query to check if conference exists for this student based on name and date
 		String query = "select count(*) > 0 \n" + 
 				"from conference\n" + 
 				"where reservator_id = (select id from users where firstname ='"+firstName+"' and lastname = '"+lastName+"') and date = '"+date+"';";	
