@@ -3,6 +3,7 @@ package today.bookit.pages;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -81,11 +82,15 @@ public class HuntPage {
 	}
 	public void reserveConference(String roomName) {
 		String locator = "//p[contains(text(),'"+roomName+"')]/../..//button[contains(text(),'book')]";
-		WebElement room = Driver.getDriver().findElement(By.xpath(locator));
-		BrowserUtils.waitForStaleElement(room);
-		BrowserUtils.waitForClickablility(room, 10);
-		BrowserUtils.clickUsingJavaScript(room);
-		new WebDriverWait(Driver.getDriver(), 20).until(ExpectedConditions.invisibilityOf(room));
+		WebElement roomToBook = Driver.getDriver().findElement(By.xpath(locator));
+		try {
+			BrowserUtils.waitForStaleElement(roomToBook);
+			BrowserUtils.waitForClickablility(roomToBook, 10);
+			BrowserUtils.clickUsingJavaScript(roomToBook);
+		}catch(WebDriverException e) {
+			roomToBook.click();
+		}
+		new WebDriverWait(Driver.getDriver(), 20).until(ExpectedConditions.invisibilityOf(roomToBook));
 		BrowserUtils.waitForStaleElement(confirmConference);
 		BrowserUtils.clickUsingJavaScript(confirmConference);
 	}

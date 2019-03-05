@@ -3,10 +3,7 @@
 
     <test name="WebOrders Automated Tests">
         <classes>
-            <class name="today.mookit.tests.functional.LoginTests">
-                <methods>
-                    <include name="loginTest"/>
-                </methods>
+            <class name="today.bookit.tests.functional.ReservationTests">
             </class>
         </classes>
     </test>
