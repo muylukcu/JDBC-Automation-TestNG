@@ -30,8 +30,8 @@ public class SignInPage {
 	private WebElement homepagesignIntext;
 
 	public void openHomePage() {
-		Driver.getDriver().navigate()
-				.to(ConfigurationReader.getProperty("url" + ConfigurationReader.getProperty("environment")));
+		System.out.println(ConfigurationReader.getProperty("url" + ConfigurationReader.getProperty("environment")));
+		Driver.getDriver().navigate().to(ConfigurationReader.getProperty("url" + ConfigurationReader.getProperty("environment")));
 	}
 
 	public void login(String emailStr, String passwordStr) {
