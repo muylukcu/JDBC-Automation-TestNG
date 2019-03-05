@@ -16,6 +16,7 @@ public class ReservationTests extends TestBase {
 		String from = "2:00pm";
 		String to = "4:00pm";
 		String room = "yale";
+		//test data from properties file
 		String username = ConfigurationReader.getProperty("email");
 		String password = ConfigurationReader.getProperty("password");
 		extentLogger = report.createTest("As user I ant to be able to reserve a conference");
