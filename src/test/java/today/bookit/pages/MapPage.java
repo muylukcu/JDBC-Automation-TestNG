@@ -54,5 +54,9 @@ public class MapPage {
 		Assert.assertTrue(generalschedulesubtitle.getText().equals(lightsidetitle));
 	}
 	
+	public void goToHunt() {
+		BrowserUtils.waitForVisibility(hunt, 20);
+		hunt.click();
+	}
 	
 }

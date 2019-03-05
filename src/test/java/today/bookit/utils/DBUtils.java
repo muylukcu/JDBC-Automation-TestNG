@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,9 +20,9 @@ public class DBUtils {
 
 	public static void createConnection() {
 		String url = ConfigurationReader.getProperty("dburl");
-		String user = ConfigurationReader.getProperty("dbuername");
+		String user = ConfigurationReader.getProperty("dbuser");
 		String password = ConfigurationReader.getProperty("dbpassword");
-
+		//connect to the data base
 		try {
 			connection = DriverManager.getConnection(url, user, password);
 		} catch (SQLException e) {
@@ -206,12 +208,14 @@ public class DBUtils {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new RuntimeException();
 		}
 		try {
 			resultSet = statement.executeQuery(query);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new RuntimeException();
 		}
 	}
 
@@ -223,5 +227,26 @@ public class DBUtils {
 		return rowCount;
 
 	}
+	
+	public static boolean verifyConferenceHasBeenCraeted(String firstName, String lastName, String date) {
+		//format date to the appropriate format 
+		date = BrowserUtils.convertDateFormat("MMMM dd, yyyy", "yyyy-MM-dd", date).trim();
+		String query = "select count(*) > 0 \n" + 
+				"from conference\n" + 
+				"where reservator_id = (select id from users where firstname ='"+firstName+"' and lastname = '"+lastName+"') and date = '"+date+"';";	
+		System.out.println(query);
+		executeQuery(query);
+		boolean isExists = false;
+		try {
+			resultSet.next();
+			isExists = resultSet.getBoolean(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
+		return isExists;
+	}
+	
+	
 
 }

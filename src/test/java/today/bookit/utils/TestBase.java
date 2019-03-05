@@ -24,6 +24,8 @@ public abstract class TestBase {
 
 	@BeforeMethod(alwaysRun = true)
 	public void setupMethod() {
+		//connect to the data base
+		DBUtils.createConnection();
 		driver = Driver.getDriver();
 		pages = new Pages();
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
