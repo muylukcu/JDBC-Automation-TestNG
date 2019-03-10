@@ -218,6 +218,19 @@ public class DBUtils {
 			throw new RuntimeException();
 		}
 	}
+	
+	public static String getStringData(String query) {
+		executeQuery(query);
+		String data="";
+		try {
+			resultSet.next();
+			data = resultSet.getString(1);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return data;
+	}
 
 	public static int getRowCount() throws Exception {
 
@@ -247,6 +260,8 @@ public class DBUtils {
 		}
 		return isExists;
 	}
+	
+	
 	
 	
 

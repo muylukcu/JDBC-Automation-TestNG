@@ -13,8 +13,8 @@ public class ReservationTests extends TestBase {
 	public void reserveConference() {
 		//test data
 		String date = "March 5, 2019";
-		String from = "2:00pm";
-		String to = "4:00pm";
+		String from = "5:00pm";
+		String to = "6:00pm";
 		String room = "yale";
 		//test data from properties file
 		String username = ConfigurationReader.getProperty("email");
